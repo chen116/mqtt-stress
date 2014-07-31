@@ -1,0 +1,36 @@
+# file: roles/common/tasks/main.yml
+
+- name: be sure mosquitto repository is configured
+  apt_repository: repo='ppa:mosquitto-dev/mosquitto-ppa' state=present
+  sudo: yes
+  when: (broker is defined) or (simplepub is defined)
+
+- name: be sure mosquitto is installed
+  apt: name=mosquitto state=latest update_cache=yes
+  sudo: yes
+  when: broker is defined
+
+- name: be sure mosquitto client is installed
+  apt: name=mosquitto-clients state=latest update_cache=yes
+  sudo: yes
+  when: simplepub is defined
+
+- name: be sure mosquitto demon configuration is there
+  command: creates="/etc/mosquitto/mosquitto.conf" cp /etc/mosquitto/mosquitto.conf.example /etc/mosquitto/mosquitto.conf
+  sudo: yes
+  when: broker is defined
+
+- name: be sure mosquitto is running and enabled
+  service: name=mosquitto state=started
+  sudo: yes
+  when: broker is defined
+  
+- name: be sure python pip is installed
+  apt: name=python-pip state=latest update_cache=yes
+  sudo: yes
+  when: simplepub is not defined
+
+- name: be sure python-mosquitto is installed
+  pip: name=paho-mqtt state=latest
+  sudo: yes
+  when: simplepub is not defined

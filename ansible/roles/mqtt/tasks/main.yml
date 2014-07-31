@@ -1,0 +1,24 @@
+# file: roles/mqtt/tasks/main.yml
+
+- name: publish one message
+  command: /usr/bin/mosquitto_pub -h {{ targethost }} -t {{ topic }} -m {{ message }}
+  when: simplepub is defined
+
+- name: Copy stress test script file
+  copy: src=../mqtt_stress_test dest=/tmp/test.py mode=755
+  when: simplepub is not defined
+  register: testfile
+
+- name: Create stress test INI file
+  template: src=mqtt_stress_test.j2 dest=/tmp/test.ini mode=755
+  when: simplepub is not defined
+  register: testinifile
+
+- name: Execute stress test script
+  shell: /tmp/test.py>/tmp/test.log
+  notify:
+  - Fetch result
+  - Clean testfile
+  - Clean testinifile
+  when: simplepub is not defined
+

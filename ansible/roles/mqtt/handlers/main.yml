@@ -1,0 +1,12 @@
+# file: roles/mqtt/handlers/main.yml
+
+- name: Fetch result
+  fetch: src=/tmp/test.log dest=fetched
+
+- name: Clean testfile
+  file: dest=/tmp/test.py state=absent
+  when: testfile.changed
+
+- name: Clean testinifile
+  file: dest=/tmp/test.ini state=absent
+  when: testinifile.changed

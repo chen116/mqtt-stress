@@ -1,0 +1,11 @@
+[MQTT]
+url       : {{ targethost | default('mqtt://localhost:1883') }}
+clientid  : {{ targethost | default('stress') }}
+[MESSAGES]
+msg_num   : {{ msg_num    | default(900) }}
+sleep_min : {{ sleep_min  | default(0.50) }}
+sleep_max : {{ sleep_max  | default(1.50) }}
+threads   : {{ threads    | default(80) }}
+topic     : {{ topic      | default('/stress') }}
+msg       : {{ message    | default('adbc') }}
+

@@ -1,0 +1,11 @@
+ansible_sudo_pass: <secret>
+ansible_ssh_user: foouser
+ansible_connection: ssh
+targethost  : testserver.com:1883
+clientid    : somedomain
+topic       : fromsomedomain
+message     : test
+msg_num     : 1000
+sleep_min   : 0.10
+sleep_max   : 0.50
+threads     : 100

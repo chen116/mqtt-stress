@@ -1,0 +1,8 @@
+# file: roles/cleanup/tasks/main.yml
+
+- name: Clean testfile
+  file: dest=/tmp/test.py state=absent
+
+- name: Clean testinifile
+  file: dest=/tmp/test.ini state=absent
+

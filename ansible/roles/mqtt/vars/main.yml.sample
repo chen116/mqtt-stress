@@ -1,0 +1,8 @@
+targethost  : localhost
+clientid    : stress
+topic       : ansible
+message     : ansible
+msg_num     : 1000
+sleep_min   : 2.00
+sleep_max   : 3.50
+threads     : 100

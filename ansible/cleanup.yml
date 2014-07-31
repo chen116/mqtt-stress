@@ -1,0 +1,5 @@
+# file: mqtt.yml
+- hosts: mqtthosts
+  roles:
+    - cleanup
+

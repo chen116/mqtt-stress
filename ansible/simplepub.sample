@@ -1,0 +1,17 @@
+# file: stage
+
+[home-hosts]
+localhost
+
+[mqtthosts:children]
+home-hosts
+
+[mqtthosts:vars]
+# force target for MQTT messages stress test
+targethost=localhost:1883
+# force install of broker
+broker=true
+# force using simple publication of one message only
+simplepub=true
+targethost=localhost
+

@@ -1,0 +1,15 @@
+# file: production
+
+[home-hosts]
+localhost
+
+[internal-hosts]
+myhost
+
+[external-hosts]
+www.somedomain.com
+
+[mqtthosts:children]
+home-hosts
+internal-hosts
+external-hosts
