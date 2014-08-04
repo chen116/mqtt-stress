@@ -1,9 +1,6 @@
 ansible_sudo_pass: <secret>
 ansible_connection: local
-targethost  : testserver.com:1883
 clientid    : localhost
-topic       : fromlocalhost
-message     : test
 msg_num     : 1000
 sleep_min   : 0.50
 sleep_max   : 1.50

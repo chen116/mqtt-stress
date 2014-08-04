@@ -1,6 +1,6 @@
-targethost  : localhost:1883
-clientid    : stress
-topic       : ansible
+targethost  : test.mosquitto.org:1883
+clientid    : stresspc
+topic       : stress/from{{ clientid }}
 message     : ansible
 msg_num     : 1000
 sleep_min   : 2.00

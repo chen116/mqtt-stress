@@ -11,8 +11,49 @@ The effect is: a numbered sequence of random messages, being published, with a c
 Configuration is contained in a INI-styled file.
 
 ```
+## install prerequisites ##
+# in Ubuntu/Debian
+user@host:~$ sudo aptitude install python-pip
+user@host:~$ sudo pip install paho-mqtt
+# or Fedora/Centos
+user@host:~$ sudo yum install python-pip
+user@host:~$ sudo pip install paho-mqtt
+
+## clone this script and execute against test.mosquitto.org (do not abuse!) ##
+user@host:~$ git clone https://github.com/bluewindthings/mqtt-stress
+user@host:~$ cd mqtt-stress
+user@host:~/mqtt-stress$ python mqtt_stress_test
+
+## configure for your server / options ##
 user@host:~/mqtt.stress$ vi mqtt_stress_test.ini
-user@host:~/mqtt.stress$ ./mqtt_stress_test
+```
+
+Typical output would be:
+
+```
+Config read from: mqtt_stress_test.ini
+
+==================================
+url       : test.mosquitto.org:1883
+clientid  : stress
+msg_num   : 900
+sleep_min : 0.5
+sleep_max : 1.5
+threads   : 80
+topic     : stress/fromlocalhost
+msg       : test_ini
+==================================
+
+Trying url: mqtt://test.mosquitto.org:1883
+Disconnect just in case
+Now connecting...
+Connected with rc: 0
+Subscribed: 1 (0,)
+Messages Generated: 900  Published: 660  Received: 652  so far, waiting publishing...
+...waiting 5 more seconds for subcriptions to expire...
+Disconnecting...
+Messages Generated: 900  Published: 900  Received: 900
+Elapsed Time: 17.1680960655
 ```
 
 ### Ansible
@@ -26,7 +67,7 @@ The [Ansible](http://www.ansible.com) scripts will try to copy to target hosts t
 The main configuration points are:
 
 * `ansible/production.sample`, `ansible/stage.sample`, `ansible/simplepub.sample`: define targets hostnames for different scenarios: production, staging (test), very simple one shot publication
-* `ansible/roles/mqtt/vars/main.yml`: configuration variables for the test script, once for all (default if not specified anywhere)
+* `ansible/roles/mqtt/defaults/main.yml`: configuration variables for the test script, once for all (default if not specified anywhere)
 * `ansible/host_vars/*.sample`: (one file per host named exactly after its hostname) SSH access, sudo password, test script configuration variables relevant to the single target host
 
 Run with:
