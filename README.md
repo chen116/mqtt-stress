@@ -36,6 +36,7 @@ Config read from: mqtt_stress_test.ini
 ==================================
 url       : test.mosquitto.org:1883
 clientid  : stress
+use_auth  : False
 msg_num   : 900
 sleep_min : 0.5
 sleep_max : 1.5
